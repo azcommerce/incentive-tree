@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <meta name="viewport" content="width=640,user-scalable=yes">
+    <link href="jqm/themes/IncentiveTree.min.css" rel="stylesheet" />
+    <link href="jqm/themes/jquery.mobile.icons.min.css" rel="stylesheet" />
+    <link href="jqm/jquery.mobile.structure-1.4.1.min.css" rel="stylesheet" />
+    <script src="jqm/jquery-1.10.2.min.js"></script>
+    <script src="jqm/jquery.mobile-1.4.1.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/TreeData.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            initTreeData();
+            if (treeData.SkipIntro) NextPage();
+            $("#industry").text(treeData.Industry);
+
+        });
+
+        function NextPage() {
+            treeData.Save();
+            window.location.href = "Industry.htm";
+        }
+    </script>
+    <link href="css/tree.css" rel="stylesheet" />
+    <style type="text/css">
+        html, body { min-width: 100%; min-height: 100%; max-width: 100%; max-height: 100%; width: 100%; height: 100%; }
+        div#ThePage { position: fixed!important; position: absolute; left: 0; top: 0; right: 0; bottom: 0;  }
+        div#TheFooter { position: absolute; width: 100%; bottom: 0; margin: 0; padding: 0; }
+        button.ui-btn { margin: 0; }
+    </style>
+</head>
+<body>
+    <div id="ThePage">
+        <h2 class="ui-bar ui-bar-a">ACA Incentive Tree</h2>
+        <div class="ui-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan blandit fermentum. Pellentesque cursus mauris purus, auctor commodo mi ullamcorper nec. Donec semper mattis eros, nec condimentum ante sollicitudin quis. Etiam orci sem, porttitor ut tellus nec, blandit posuere urna. Proin a arcu non lacus pretium faucibus. Aliquam sed est porttitor, ullamcorper urna nec, vehicula lorem. Cras porttitor est lorem, non venenatis diam convallis congue.</p>
+        </div>
+        <div id="TheFooter">
+            <button onclick="NextPage();" class="ui-btn ui-icon-arrow-r ui-btn-icon-right">Next</button>
+        </div>
+    </div>
+</body>
+</html>
