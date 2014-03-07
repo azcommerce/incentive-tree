@@ -77,6 +77,7 @@
     -->
 
     <!-- Define app icon for each platform. -->
+    <!--
     <icon src="icon.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
     <icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
@@ -86,6 +87,7 @@
     <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
     <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
     <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
+    -->
 
     <!-- Define app splash screen for each platform. -->
     <!--
