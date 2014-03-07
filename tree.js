@@ -1,5 +1,6 @@
 ﻿$(function () {
     initialize();
+    update_report();
 });
 
 function expandDiv(divid) {
@@ -66,7 +67,9 @@ function update_report() {
     $("#stg-value a").text(stg);
 
     var results = get_results_from_values(ind, job, wag, cap, loc, stg);
-    $("#results-text").html(results);
+    var resultsWithLinks = Autolinker.link(results);
+    $("#results-text").html(resultsWithLinks);
+    $("#results-text-for-email").html(results);
     update_mailto_url();
 }
 
@@ -79,37 +82,37 @@ function get_results_from_values(ind, job, wag, cap, loc, stg) {
         (job != "None") &&
         (wag == "Above County Median, Below State Median (All but Maricopa Co.)" || wag == "Above County & State Median Wages" || wag == "Not Sure") &&
         (cap != "No capital investment")
-    ) results += "<li>Competes Fund (not on website)</li>";
+    ) results += "\t<li>Competes Fund (not on website)</li>\n";
 
     // Angel (>$25K investment)
     if (cap == "$25M to $50M" || cap == "More than $50M")
-        results += "<li>Angel Investment Tax Credit (as an investor) (http://www.azcommerce.com/incentives/angel-investment)</li>";
+        results += "\t<li>Angel Investment Tax Credit (as an investor) (http://www.azcommerce.com/incentives/angel-investment)</li>\n";
 
     // Angel Biz (Tech, startup/small, innovationspace)
     if (stg == "Startup or small business in the innovation space")
-        results += "<li>Angel Investment Tax Credit (as a business) (http://www.azcommerce.com/incentives/angel-investment)</li>";
+        results += "\t<li>Angel Investment Tax Credit (as a business) (http://www.azcommerce.com/incentives/angel-investment)</li>\n";
 
     // Healthy Forest
     if (ind == "Foresty (Harvesting, Processing or Transporting)")
-        results += "<li>Healthy Forest Enterprise (http://www.azcommerce.com/incentives/healthy-forest)</li>";
+        results += "\t<li>Healthy Forest Enterprise (http://www.azcommerce.com/incentives/healthy-forest)</li>\n";
 
     // Job Training (net new) (new jobs)
     if (job != "None")
-        results += "<li>Job Training Program for Net New Jobs (http://www.azcommerce.com/incentives/job-training)</li>";
+        results += "\t<li>Job Training Program for Net New Jobs (http://www.azcommerce.com/incentives/job-training)</li>\n";
 
     // Job Training (incumbent)
-    results += "<li>Job Training Program for Incumbent Workers (http://www.azcommerce.com/incentives/job-training)</li>";
+    results += "\t<li>Job Training Program for Incumbent Workers (http://www.azcommerce.com/incentives/job-training)</li>\n";
 
     // MRZ (Aerospace, in MRZ)
     if (ind == "Aerospace & Defense" && loc.indexOf("In a Military Reuse Zone") != -1) {
         // Tax credit requires new jobs
         if (job != "None")
-            results += "<li>Military Reuse Zone Tax Credit (http://www.azcommerce.com/incentives/military-reuse-zone)</li>";
+            results += "\t<li>Military Reuse Zone Tax Credit (http://www.azcommerce.com/incentives/military-reuse-zone)</li>\n";
         // Property tax has no other rquirements
-        results += "<li>Military Reuse Zone Property Reclassification (http://www.azcommerce.com/incentives/military-reuse-zone)</li>";
+        results += "\t<li>Military Reuse Zone Property Reclassification (http://www.azcommerce.com/incentives/military-reuse-zone)</li>\n";
         // TPT has investment requirement
         if(cap!="No capital investment")
-            results += "<li>Military Reuse Zone TPT Exemption (http://www.azcommerce.com/incentives/military-reuse-zone)</li>";
+            results += "\t<li>Military Reuse Zone TPT Exemption (http://www.azcommerce.com/incentives/military-reuse-zone)</li>\n";
     }
 
     // Quality Jobs - METRO
@@ -119,7 +122,7 @@ function get_results_from_values(ind, job, wag, cap, loc, stg) {
         (cap == "$5M to $25M" || cap == "$25M to $50M" || cap == "More than $50M" || cap == "Not Sure") &&
         (loc == "Metro Area" || loc=="Not Sure")
     )
-        results += "<li>Quality Jobs Tax Credit (http://www.azcommerce.com/incentives/quality-jobs)</li>";
+        results += "\t<li>Quality Jobs Tax Credit (http://www.azcommerce.com/incentives/quality-jobs)</li>\n";
 
     // Quality Jobs - RURAL
     if (
@@ -128,7 +131,7 @@ function get_results_from_values(ind, job, wag, cap, loc, stg) {
         (cap == "$1M to $5M" || cap == "$5M to $25M" || cap == "$25M to $50M" || cap == "More than $50M" || cap == "Not Sure") &&
         (loc == "Rural Area" || loc == "Not Sure")
     )
-        results += "<li>Quality Jobs Tax Credit (http://www.azcommerce.com/incentives/quality-jobs)</li>";
+        results += "\t<li>Quality Jobs Tax Credit (http://www.azcommerce.com/incentives/quality-jobs)</li>\n";
 
     // Qualified Facilities
     if(
@@ -137,7 +140,7 @@ function get_results_from_values(ind, job, wag, cap, loc, stg) {
         (wag=="Above State Median, Below County Median (Maricopa Co.)" || wag=="Above County & State Median Wages" || wag=="Not Sure") &&
         (cap=="$250K to $1M" || cap == "$1M to $5M" || cap == "$5M to $25M" || cap == "$25M to $50M" || cap == "More than $50M" || cap == "Not Sure")
     )
-        results += "<li>Qualified Facility Tax Credit (http://www.azcommerce.com/incentives/qualified-facility)</li>";
+        results += "\t<li>Qualified Facility Tax Credit (http://www.azcommerce.com/incentives/qualified-facility)</li>\n";
 
     // RETIP
     if (
@@ -146,14 +149,14 @@ function get_results_from_values(ind, job, wag, cap, loc, stg) {
         (wag=="Above State Median, Below County Median (Maricopa Co.)" || wag=="Above County & State Median Wages" || wag=="Not Sure")
     ) {
         if (cap == "$25M to $50M" || cap == "More than $50M" || cap == "Not Sure")
-            results += "<li>RETIP Property Tax Reduction (http://www.azcommerce.com/incentives/renewable-energy-tax-incentive)</li>";
+            results += "\t<li>RETIP Property Tax Reduction (http://www.azcommerce.com/incentives/renewable-energy-tax-incentive)</li>\n";
         if (cap == "$250K to $1M" || cap == "$1M to $5M" || cap == "$5M to $25M" || cap == "$25M to $50M" || cap == "More than $50M" || cap == "Not Sure")
-            results += "<li>RETIP Tax Credit (http://www.azcommerce.com/incentives/renewable-energy-tax-incentive)</li>";
+            results += "\t<li>RETIP Tax Credit (http://www.azcommerce.com/incentives/renewable-energy-tax-incentive)</li>\n";
     }
 
     // R&D
     if (ind == "Research & Development")
-        results += "<li>Research & Development Tax Credit (http://www.azcommerce.com/incentives/research-development)</li>";
+        results += "\t<li>Research & Development Tax Credit (http://www.azcommerce.com/incentives/research-development)</li>\n";
 
     // Data Center
     if (
@@ -163,20 +166,22 @@ function get_results_from_values(ind, job, wag, cap, loc, stg) {
             ((loc=="Metro Area" || loc=="Not Sure") && (cap == "More than $50M" || cap == "Not Sure"))
         )
     )
-        results += "<li>Computer Data Center Program (http://www.azcommerce.com/incentives/computer-data-center-program)</li>";
+        results += "\t<li>Computer Data Center Program (http://www.azcommerce.com/incentives/computer-data-center-program)</li>\n";
 
     // Small Business
     if (stg == "Other startup or small business")
-        results += "<li>Small Business Services (http://www.azcommerce.com/programs/small-business-services)</li>"
+        results += "\t<li>Small Business Services (http://www.azcommerce.com/programs/small-business-services)</li>\n"
 
     // Available to anyone
-    results += "<li>Workforce Services (http://www.azcommerce.com/business-first/skilled-available-workforce)</li>";
+    results += "\t<li>Workforce Services (http://www.azcommerce.com/business-first/skilled-available-workforce)</li>\n";
 
 
     if (results == "") results = "There do not appear to be any applicable incentives or programs.  Visit our website at www.azcommerce.com for more information.";
-    else results = "<p>The following incentives and/or programs may be applicable for a project with the specified parameters:</p>" +
+    else {
+        results = "<p>The following incentives and/or programs may be applicable for a project with the specified parameters:</p>\n\n" +
         "<ul>" + results + "</ul>" +
-        "<p>This is not a definitive list and some incentives listed may have additional requirements that must be met.  Refer to the website for specific requirements.</p>";
+        "\n<p>This is not a definitive list and some incentives listed may have additional requirements that must be met.  Refer to the website for specific requirements.</p>";
+    }
     return results;
 }
 
@@ -184,7 +189,7 @@ function update_mailto_url() {
     // The email address field
     var eml = $("#email-address").val();
     // The body of the email
-    var bdy = $("#results-text").html();
+    var bdy = $("#results-text-for-email").text();
     // Encode the body
     bdy = encodeURIComponent(bdy);
     // Build the URL

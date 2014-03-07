@@ -10,10 +10,11 @@
     <script src="jqm/jquery-1.10.2.min.js"></script>
     <script src="jqm/jquery.mobile-1.4.1.min.js"></script>
     <link href="css/tree.css" rel="stylesheet" />
+    <script type="text/javascript" src="Autolinker.min.js"></script>
     <script type="text/javascript" src="tree.js"></script>
     <style type="text/css">
-        .collapsible-no-icon .ui-btn::after { x-display:none; }
         #results-controlgroup div { text-align: left; }
+        #results-text-for-email { display: none; }
     </style>
 </head>
 <body>
@@ -143,15 +144,8 @@
         <div data-role="collapsible" data-mini="true" data-iconpos="right" class="collapsible-no-icon">
             <h1>Results</h1>
             <div id="results-text">
-                <p>The following incentives or programs may be available for the this company/project:</p>
-                <ul>
-                    <li>asdfasdf</li>
-                    <li>asdfasdf</li>
-                    <li>asdfasdf</li>
-                    <li>asdfasdf</li>
-                    <li>asdfasdf</li>
-                </ul>
             </div>
+            <div id="results-text-for-email"></div>
             <p>This list can be sent via email by entering an email address below:<br />
                 <input id="email-address" type="email" /><a id="email-send" data-role="button" data-icon="star" data-iconpos="" data-mini="true">send info</a></p>
         </div>
