@@ -188,12 +188,15 @@ function get_results_from_values(ind, job, wag, cap, loc, stg) {
 function update_mailto_url() {
     // The email address field
     var eml = $("#email-address").val();
+    // The subject line
+    var sub = "ACA Incentive Tree Results";
     // The body of the email
-    var bdy = $("#results-text-for-email").text();
-    // Encode the body
+    var bdy = "The following are the items you selected.  The list of incentives is based on these selections:\n" + $("#results-controlgroup").text() + "\n" + $("#results-text-for-email").text();
+    // Encode the subject & body
+    sub = encodeURIComponent(sub);
     bdy = encodeURIComponent(bdy);
     // Build the URL
-    var url = "mailto:" + eml + "?body=" + bdy;
+    var url = "mailto:" + eml + "?subject=" + sub + "&body=" + bdy;
     // Set the URL
     $("#email-send").attr("href", url);
 }
